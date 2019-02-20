@@ -46,10 +46,11 @@ main{
     
 }
 li img{
-    max-width: 80%;
+    max-width: 200px;
+    max-height: 180px;
     display: flex;
     justify-content: space-around;
-    /* max-height: 50%; */
+    /* max-width: 70%; */
 }
 
 
