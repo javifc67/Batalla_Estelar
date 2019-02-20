@@ -227,12 +227,15 @@ class CampoDeBatalla {
     }
   }
   
-
-  EmpezarPartida(ejercito1, ejercito2) {
+  EmpezarPartida(ejercito1, ejercito2){
     this.InsertToHtml(ejercito1, ejercito2)
     let turno = 0;
+    Turno(turno)
+  }
+  Turno(turno) {
+    
 
-    while (this.sector1.length >= 1 && this.sector2.length >= 1) {
+    
       if (turno == 0) {
         if (this.sector1[0] != undefined) {
           this.sector1[0].Disparar(
@@ -269,12 +272,15 @@ class CampoDeBatalla {
       }
       /* verdad=true;
       verdad=!verdad; */
-    }
-    this.ObtenerElementosEnPosicion();
-    if (this.sector1.length >= 1) {
-      console.log("Ganó " + equipo1.nombre);
-    } else {
-      console.log("Ganó " + equipo2.nombre);
+    
+    if(this.sector1.length >= 1 && this.sector2.length >= 1){
+
+      this.ObtenerElementosEnPosicion();
+      if (this.sector1.length >= 1) {
+        console.log("Ganó " + equipo1.nombre);
+      } else {
+        console.log("Ganó " + equipo2.nombre);
+      }
     }
   }
 
@@ -323,7 +329,10 @@ let naboo = new CampoDeBatalla(
 );
 naboo.ColocarNaves(equipo1);
 naboo.ColocarNaves(equipo2);
-naboo.EmpezarPartida(equipo1, equipo2);
+function Empezar(){
+
+  naboo.EmpezarPartida(equipo1, equipo2);
+}
 
 /* naboo.sector1[0].vida = 0; 
 console.log(naboo.sector1.length);
@@ -334,3 +343,6 @@ console.log(naboo.sector1.length);
 
 console.log(naboo.sector1[0].vida);*/
 //
+function disparar(){
+  naboo.Turno(equipo1, equipo2)
+}
