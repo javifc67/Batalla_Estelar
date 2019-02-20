@@ -157,23 +157,73 @@ class CampoDeBatalla {
       }
     }
   }
-  InsertToHtml(ejercito) {
-    for (let index = 0; index < this.sector1.length; index++) {
-      let div = document.getElementById(ejercito.id);
-      let element = ejercito.listaNaves[index];
-      div.innerHTML +=
-        '<li id="' +
-        ejercito.id +
-        index +
-        '"><img src="' +
-        element.imagen +
-        '" alt="' +
-        element.nombre +
-        '"></li>';
-    }
-  }
+  InsertToHtml(ejercito1, ejercito2) {
+   
 
-  EmpezarPartida() {
+      for (let index1 = 0; index1 < this.sector1.length; index1++) {
+        let div1 = document.getElementById(ejercito1.id);
+        let element1 = ejercito1.listaNaves[index1];
+        div1.innerHTML +=
+        '<li id="' +
+        ejercito1.id +
+        index1 +
+        '"><img src="' +
+        element1.imagen +
+        '" alt="' +
+        element1.nombre +
+        '"></li>';
+        for (let x = 0; x < this.sector1.length; x++) {
+          if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
+          BorrarNave(ejercito1, x)
+
+          
+        }
+      }
+    
+
+      for (let index2 = 0; index2 < this.sector2.length; index2++) {
+        let div2 = document.getElementById(ejercito2.id);
+        let element2 = ejercito2.listaNaves[index2];
+        div2.innerHTML +=
+        '<li id="' +
+        ejercito2.id +
+        index2 +
+        '"><img src="' +
+        element2.imagen +
+        '" alt="' +
+        element2.nombre +
+        '"></li>';
+        for (let x = 0; x < this.sector2.length; x++) {
+          if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
+          BorrarNave(ejercito2, x)
+        }
+      }
+    
+  }
+  BorrarNave(ejercito, posicion){
+    let d = document.getElementById(ejercito.id);
+    let d_nested = document.getElementById(
+      this.sector1[posicion].id
+    );
+    
+    if (ejercito.id == "arriba") {
+      d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
+    } else {
+      d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
+    }
+
+    setTimeout(function() {
+      //Borramos el elemento de la lista que contiene la nave destruída
+      d.removeChild(d_nested);
+    }, 1000);
+
+    // Borra 1 elemento desde la posicion
+    this.sector1.splice(posicion, 1);
+  }
+  
+
+  EmpezarPartida(ejercito1, ejercito2) {
+    this.InsertToHtml(ejercito1, ejercito2)
     let turno = 0;
 
     while (this.sector1.length >= 1 && this.sector2.length >= 1) {
@@ -267,9 +317,7 @@ let naboo = new CampoDeBatalla(
 );
 naboo.ColocarNaves(equipo1);
 naboo.ColocarNaves(equipo2);
-naboo.InsertToHtml(equipo1);
-naboo.InsertToHtml(equipo2);
-naboo.EmpezarPartida();
+naboo.EmpezarPartida(equipo1, equipo2);
 
 /* naboo.sector1[0].vida = 0; 
 console.log(naboo.sector1.length);
