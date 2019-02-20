@@ -8,27 +8,28 @@ class Nave {
     this.id = id;
   }
   Disparar(dolor, equipo, tamaño, precision) {
-   let objetivo = this.SeleccionarObjetivo(0, tamaño, precision)
-    this.RecibirDisparo(dolor, objetivo, equipo)
+    let objetivo = this.SeleccionarObjetivo(0, tamaño, precision);
+    this.RecibirDisparo(dolor, objetivo, equipo);
   }
 
   SeleccionarObjetivo(min, max, precision) {
-    let objetivo = Math.random() * (max - min) + min
-    if((Math.random() * (100 - 0) + 0) < precision){
-      return Math.floor(objetivo)
+    let objetivo = Math.random() * (max - min) + min;
+    if (Math.random() * (100 - 0) + 0 < precision) {
+      return Math.floor(objetivo);
     } else {
-      console.log("disparo fallado")
-      return -1
+      console.log("disparo fallado");
+      return -1;
     }
   }
   RecibirDisparo(dolor, objetivo, equipo) {
-    if(objetivo == -1){return}
-    if (equipo == 1){
+    if (objetivo == -1) {
+      return;
+    }
+    if (equipo == 1) {
       naboo.sector1[objetivo].vida -= dolor;
-    } else{
+    } else {
       naboo.sector2[objetivo].vida -= dolor;
     }
-    
   }
 }
 class Nave_I extends Nave {
@@ -69,7 +70,8 @@ class Ejercito {
         " de vida" +
         " de " +
         defensor.nombre
-    );}
+    );
+  }
   CambiarDeTactica(tactica) {}
 }
 class Factorio {
@@ -78,13 +80,47 @@ class Factorio {
     this.tacticas = [];
     this.listaNaves = [];
   }
-  CrearEjercito(nombreEjercito,id,nombre1, n1, imagen1,nombre2, n2,imagen2,nombre3, n3, imagen3) {
+  CrearEjercito(
+    nombreEjercito,
+    id,
+    nombre1,
+    n1,
+    imagen1,
+    nombre2,
+    n2,
+    imagen2,
+    nombre3,
+    n3,
+    imagen3
+  ) {
     const ejercito = new Ejercito(nombreEjercito, id);
     this.listaEquipos.push(ejercito);
-    this.CrearNaves(ejercito,nombre1, n1, imagen1,nombre2, n2,imagen2,nombre3, n3, imagen3);
+    this.CrearNaves(
+      ejercito,
+      nombre1,
+      n1,
+      imagen1,
+      nombre2,
+      n2,
+      imagen2,
+      nombre3,
+      n3,
+      imagen3
+    );
     return ejercito;
   }
-  CrearNaves(ejercito,nombre1, n1, imagen1,nombre2, n2,imagen2,nombre3, n3, imagen3) {
+  CrearNaves(
+    ejercito,
+    nombre1,
+    n1,
+    imagen1,
+    nombre2,
+    n2,
+    imagen2,
+    nombre3,
+    n3,
+    imagen3
+  ) {
     let naves;
     while (n1 > 0) {
       naves = new Nave_I(nombre1, imagen1);
@@ -109,24 +145,22 @@ class CampoDeBatalla {
   constructor(nNaves, nNaves2) {
     this.sector1 = [nNaves];
     this.sector2 = [nNaves2];
-    this.disparo = 0;
   }
   ColocarNaves(ejercito) {
     for (let i = 0; i < ejercito.listaNaves.length; i++) {
       if (ejercito.nombre == equipo1.nombre) {
         this.sector1[i] = ejercito.listaNaves[i];
-        this.sector1[i].id = ejercito.nombre + i
+        this.sector1[i].id = ejercito.nombre + i;
       } else {
         this.sector2[i] = ejercito.listaNaves[i];
-        this.sector2[i].id = ejercito.nombre + i
+        this.sector2[i].id = ejercito.nombre + i;
       }
     }
-
   }
-  InsertToHtml(ejercito){
+  InsertToHtml(ejercito) {
     for (let index = 0; index < this.sector1.length; index++) {
       let div = document.getElementById(ejercito.id);
-      let element = ejercito.poscionNaves[index]
+      let element = ejercito.listaNaves[index];
       div.innerHTML +=
         '<li id="' +
         ejercito.id +
@@ -138,70 +172,95 @@ class CampoDeBatalla {
         '"></li>';
     }
   }
-  
 
   EmpezarPartida() {
     let turno = 0;
-    
+
     while (this.sector1.length >= 1 && this.sector2.length >= 1) {
       if (turno == 0) {
         if (this.sector1[0] != undefined) {
-        this.sector1[0].Disparar(this.sector1[0].dolor, 0, this.sector2.length, this.sector1[0].precision)
-        
-      }
-         for (let x=0;x<this.sector1.length;x++){
-          if(this.sector1[x].vida < 1)
-          this.sector1.splice(x,1);
-        }  
-       
+          this.sector1[0].Disparar(
+            this.sector1[0].dolor,
+            0,
+            this.sector2.length,
+            this.sector1[0].precision
+          );
+        }
+        for (let x = 0; x < this.sector1.length; x++) {
+          if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
+        }
       } else {
         if (this.sector2[0] != undefined) {
-          this.sector2[0].Disparar(this.sector2[0].dolor, 1, this.sector1.length, this.sector2[0].precision)
-          
+          this.sector2[0].Disparar(
+            this.sector2[0].dolor,
+            1,
+            this.sector1.length,
+            this.sector2[0].precision
+          );
         }
-           for (let x=0;x<this.sector2.length;x++){
-            if(this.sector2[x].vida < 1)
-            this.sector2.splice(x,1);
+        for (let x = 0; x < this.sector2.length; x++) {
+          if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
         }
-          }  
+      }
       if (turno == 0) {
         turno = 1;
-        console.log("TURNO DE "+ equipo1.nombre);
+        console.log("TURNO DE " + equipo1.nombre);
         this.ObtenerElementosEnPosicion();
-        
       } else {
         turno = 0;
-        console.log("TURNO DE "+ equipo2.nombre);
+        console.log("TURNO DE " + equipo2.nombre);
         this.ObtenerElementosEnPosicion();
       }
       /* verdad=true;
       verdad=!verdad; */
     }
     this.ObtenerElementosEnPosicion();
-    if (this.sector1.length >= 1){
-      console.log("Ganó " + equipo1.nombre)
-    } else{
-      console.log("Ganó " + equipo2.nombre)
+    if (this.sector1.length >= 1) {
+      console.log("Ganó " + equipo1.nombre);
+    } else {
+      console.log("Ganó " + equipo2.nombre);
     }
   }
 
   ObtenerElementosEnPosicion() {
-    console.log(equipo1.nombre)
+    console.log(equipo1.nombre);
     this.sector1.forEach(element => {
       console.log(element);
     });
-    console.log(equipo2.nombre)
+    console.log(equipo2.nombre);
     this.sector2.forEach(element => {
       console.log(element);
     });
   }
-  
-
 }
 const factorio = new Factorio();
 
-const equipo1 = factorio.CrearEjercito("EL IMPERIO","arriba","Caza TIE", 3,"1.png","Bombardero TIE", 2,"1.png","Interceptor TIE", 5,"1.png");
-const equipo2 = factorio.CrearEjercito("LOS REBELDES","abajo","Caza estelar X-Wing T-65B", 2,"1.png","Caza estelar bombardero BTL-A4 Ala-Y", 5,"1.png","Caza estelar Ala-A", 3,"1.png");
+const equipo1 = factorio.CrearEjercito(
+  "EL IMPERIO",
+  "arriba",
+  "Caza TIE",
+  3,
+  "1.png",
+  "Bombardero TIE",
+  2,
+  "1.png",
+  "Interceptor TIE",
+  5,
+  "1.png"
+);
+const equipo2 = factorio.CrearEjercito(
+  "LOS REBELDES",
+  "abajo",
+  "Caza estelar X-Wing T-65B",
+  2,
+  "1.png",
+  "Caza estelar bombardero BTL-A4 Ala-Y",
+  5,
+  "1.png",
+  "Caza estelar Ala-A",
+  3,
+  "1.png"
+);
 let naboo = new CampoDeBatalla(
   equipo1.listaNaves.length,
   equipo2.listaNaves.length
@@ -212,7 +271,6 @@ naboo.InsertToHtml(equipo1);
 naboo.InsertToHtml(equipo2);
 naboo.EmpezarPartida();
 
-
 /* naboo.sector1[0].vida = 0; 
 console.log(naboo.sector1.length);
 if (naboo.sector1[0].vida < 1) {
@@ -221,4 +279,4 @@ if (naboo.sector1[0].vida < 1) {
 console.log(naboo.sector1.length);
 
 console.log(naboo.sector1[0].vida);*/
-// 
+//
