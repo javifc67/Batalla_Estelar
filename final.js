@@ -131,7 +131,7 @@ class CampoDeBatalla {
         '<li id="' +
         ejercito.id +
         index +
-        '"><img src="' +
+        '"><img src="/' +
         element.imagen +
         '" alt="' +
         element.nombre +
