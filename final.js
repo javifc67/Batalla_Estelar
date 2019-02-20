@@ -79,6 +79,7 @@ class Factorio {
     this.listaEquipos = [];
     this.tacticas = [];
     this.listaNaves = [];
+    this.turno = 0;
   }
   CrearEjercito(
     nombreEjercito,
@@ -158,12 +159,10 @@ class CampoDeBatalla {
     }
   }
   InsertToHtml(ejercito1, ejercito2) {
-   
-
-      for (let index1 = 0; index1 < this.sector1.length; index1++) {
-        let div1 = document.getElementById(ejercito1.id);
-        let element1 = ejercito1.listaNaves[index1];
-        div1.innerHTML +=
+    for (let index1 = 0; index1 < this.sector1.length; index1++) {
+      let div1 = document.getElementById(ejercito1.id);
+      let element1 = ejercito1.listaNaves[index1];
+      div1.innerHTML +=
         '<li id="' +
         ejercito1.id +
         index1 +
@@ -172,43 +171,40 @@ class CampoDeBatalla {
         '" alt="' +
         element1.nombre +
         '"></li>';
-        for (let x = 0; x < this.sector1.length; x++) {
-          if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
-          this.BorrarNave(ejercito1, x)
-
-          
-        }
+      for (let x = 0; x < this.sector1.length; x++) {
+        if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
+        /* this.BorrarNave(ejercito1, x); */
       }
-    
+    }
 
-      for (let index2 = 0; index2 < this.sector2.length; index2++) {
-        let div2 = document.getElementById(ejercito2.id);
-        let element2 = ejercito2.listaNaves[index2];
-        div2.innerHTML +=
+    for (let index2 = 0; index2 < this.sector2.length; index2++) {
+      let div2 = document.getElementById(ejercito2.id);
+      let element2 = ejercito2.listaNaves[index2];
+      /* const u = `
+      <li id=${index2}>
+        <img src=${index2} alt=${index2} />
+      </li>
+      ` */
+      div2.innerHTML +=
         '<li id="' +
-        ejercito2.id +
+        /* sector2[index2].id  */ ejercito2.id +
         index2 +
         '"><img src="' +
         element2.imagen +
         '" alt="' +
         element2.nombre +
         '"></li>';
-        for (let x = 0; x < this.sector2.length; x++) {
-          if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
-          this.BorrarNave(ejercito2, x)
-        }
+      for (let x = 0; x < this.sector2.length; x++) {
+        if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
+        /* this.BorrarNave(ejercito2, x); */
       }
-    
+    }
   }
-  BorrarNave(ejercito, posicion){
+  BorrarNave(ejercito, posicion) {
     let d = document.getElementById(ejercito.id);
-    let d_nested = document.getElementById(
-      this.sector1[posicion].id
-    );
-    let d_nested2 = document.getElementById(
-      this.sector2[posicion].id
-    );
-    
+    let d_nested = document.getElementById(this.sector1[posicion].id);
+    let d_nested2 = document.getElementById(this.sector2[posicion].id);
+
     if (ejercito.id == "arriba") {
       d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
     } else {
@@ -222,65 +218,58 @@ class CampoDeBatalla {
 
     // Borra 1 elemento desde la posicion
     if (ejercito.id == "arriba") {
-    this.sector1.splice(posicion, 1);} else{
+      this.sector1.splice(posicion, 1);
+    } else {
       this.sector2.splice(posicion, 1);
     }
   }
-  
-  EmpezarPartida(ejercito1, ejercito2){
-    this.InsertToHtml(ejercito1, ejercito2)
-    let turno = 0;
-    this.Turno(turno)
+
+  EmpezarPartida(ejercito1, ejercito2) {
+    this.InsertToHtml(ejercito1, ejercito2);
   }
-  Turno(turno) {
-    
-
-    
-      if (turno == 0) {
-        if (this.sector1[0] != undefined) {
-          this.sector1[0].Disparar(
-            this.sector1[0].dolor,
-            0,
-            this.sector2.length,
-            this.sector1[0].precision
-          );
-        }
-        for (let x = 0; x < this.sector1.length; x++) {
-          if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
-        }
-      } else {
-        if (this.sector2[0] != undefined) {
-          this.sector2[0].Disparar(
-            this.sector2[0].dolor,
-            1,
-            this.sector1.length,
-            this.sector2[0].precision
-          );
-        }
-        for (let x = 0; x < this.sector2.length; x++) {
-          if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
-        }
+  Turno() {
+    if (this.turno == 0) {
+      if (this.sector1[0] != undefined) {
+        this.sector1[0].Disparar(
+          this.sector1[0].dolor,
+          0,
+          this.sector2.length,
+          this.sector1[0].precision
+        );
       }
-      if (turno == 0) {
-        turno = 1;
-        console.log("TURNO DE " + equipo1.nombre);
-        this.ObtenerElementosEnPosicion();
-      } else {
-        turno = 0;
-        console.log("TURNO DE " + equipo2.nombre);
-        this.ObtenerElementosEnPosicion();
+      for (let x = 0; x < this.sector1.length; x++) {
+        if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
       }
-      /* verdad=true;
-      verdad=!verdad; */
-    
-    if(this.sector1.length >= 1 && this.sector2.length >= 1){
-
+    } else {
+      if (this.sector2[0] != undefined) {
+        this.sector2[0].Disparar(
+          this.sector2[0].dolor,
+          1,
+          this.sector1.length,
+          this.sector2[0].precision
+        );
+      }
+      for (let x = 0; x < this.sector2.length; x++) {
+        if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
+      }
+    }
+    if (this.turno == 0) {
+      this.turno = 1;
+      console.log("TURNO DE " + equipo1.nombre);
       this.ObtenerElementosEnPosicion();
-      if (this.sector1.length >= 1) {
-        console.log("Ganó " + equipo1.nombre);
-      } else {
-        console.log("Ganó " + equipo2.nombre);
-      }
+    } else {
+      this.turno = 0;
+      console.log("TURNO DE " + equipo2.nombre);
+      this.ObtenerElementosEnPosicion();
+    }
+    /* verdad=true;
+      verdad=!verdad; */
+
+    if (this.sector2.length < 1) {
+      console.log("Ganó " + equipo1.nombre);
+    }
+    if (this.sector1.length < 1) {
+      console.log("Ganó " + equipo2.nombre);
     }
   }
 
@@ -329,8 +318,7 @@ let naboo = new CampoDeBatalla(
 );
 naboo.ColocarNaves(equipo1);
 naboo.ColocarNaves(equipo2);
-function Empezar(){
-
+function Empezar() {
   naboo.EmpezarPartida(equipo1, equipo2);
 }
 
@@ -343,6 +331,6 @@ console.log(naboo.sector1.length);
 
 console.log(naboo.sector1[0].vida);*/
 //
-function disparar(){
-  naboo.Turno(equipo1, equipo2)
+function disparar() {
+  naboo.Turno(equipo1, equipo2);
 }
