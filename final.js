@@ -205,11 +205,14 @@ class CampoDeBatalla {
     let d_nested = document.getElementById(
       this.sector1[posicion].id
     );
+    let d_nested2 = document.getElementById(
+      this.sector2[posicion].id
+    );
     
     if (ejercito.id == "arriba") {
       d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
     } else {
-      d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
+      d_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
     }
 
     setTimeout(function() {
@@ -218,7 +221,10 @@ class CampoDeBatalla {
     }, 1000);
 
     // Borra 1 elemento desde la posicion
-    this.sector1.splice(posicion, 1);
+    if (ejercito.id == "arriba") {
+    this.sector1.splice(posicion, 1);} else{
+      this.sector2.splice(posicion, 1);
+    }
   }
   
 
