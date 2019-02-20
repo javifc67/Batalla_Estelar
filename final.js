@@ -230,7 +230,7 @@ class CampoDeBatalla {
   EmpezarPartida(ejercito1, ejercito2){
     this.InsertToHtml(ejercito1, ejercito2)
     let turno = 0;
-    Turno(turno)
+    this.Turno(turno)
   }
   Turno(turno) {
     
