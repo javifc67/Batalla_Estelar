@@ -37,7 +37,11 @@ main{
     display: flex;
     flex-direction: row;
     list-style: none;
+<<<<<<< HEAD
     
+=======
+    /* width: 80%; */
+>>>>>>> cf49f595988c92c17ef0e56bb41b8da91e19a89e
     /* margin-top: 6rem; */
 }
 .equipo1 ul li,
@@ -46,9 +50,16 @@ main{
     justify-content: space-between;
     
 }
+.equipo1 ul li img{
+    transform: rotate(180deg);
+}
 li img{
     max-width: 70%;
+<<<<<<< HEAD
     max-height: 120px;   /* max-width: 70%; */
+=======
+    max-height: 120px; 
+>>>>>>> cf49f595988c92c17ef0e56bb41b8da91e19a89e
 }
 
 
