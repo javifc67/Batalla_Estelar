@@ -37,6 +37,7 @@ main{
     display: flex;
     flex-direction: row;
     list-style: none;
+    /* width: 80%; */
     /* margin-top: 6rem; */
 }
 .equipo1 ul li,
@@ -45,9 +46,12 @@ main{
     justify-content: space-between;
     
 }
+.equipo1 ul li img{
+    transform: rotate(180deg);
+}
 li img{
-    max-width: 70%
-    max-height: 50%;   /* max-width: 70%; */
+    max-width: 70%;
+    max-height: 120px; 
 }
 
 
