@@ -199,25 +199,28 @@ class CampoDeBatalla {
     }
   
   BorrarNave(ejercito, posicion) {
-    let d = document.getElementById(ejercito.id);
+    let d = undefined
+     d = document.getElementById(equipo1.id);
+    let d2 = document.getElementById(equipo2.id);
     let d_nested = document.getElementById(this.sector1[posicion].id);
-    let d_nested2 = document.getElementById(this.sector2[posicion].id);
+    let d2_nested2 = document.getElementById(this.sector2[posicion].id);
 
-     if (ejercito === this.sector1) {
+     if (ejercito == this.sector1) {
        d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
      } else {
-     d_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
+     d2_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
     }
 
-    // setTimeout(function() {
-    //   if (ejercito === this.sector1) {
-    //   d.removeChild(d_nested);} else {
-    //     d.removeChild(d_nested2);
-    //   }
-    // }, 1000);
+     setTimeout(function() {
+       if (d == document.getElementById(equipo1.id)) {
+       d.removeChild(d_nested);
+      } else {
+         d2.removeChild(d2_nested2);
+       }
+     }, 1000);
 
     
-    if (ejercito === this.sector1) {
+    if (ejercito == this.sector1) {
       this.sector1.splice(posicion, 1);
       
     } else {
