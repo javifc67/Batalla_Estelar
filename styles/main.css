@@ -46,9 +46,8 @@ main{
     
 }
 li img{
-    max-width: 200px;
-    max-height: 180px;
-    /* max-width: 70%; */
+    max-width: 70%
+    max-height: 50%;   /* max-width: 70%; */
 }
 
 
