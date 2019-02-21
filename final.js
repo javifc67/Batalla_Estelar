@@ -151,10 +151,10 @@ class CampoDeBatalla {
     for (let i = 0; i < ejercito.listaNaves.length; i++) {
       if (ejercito.nombre == equipo1.nombre) {
         this.sector1[i] = ejercito.listaNaves[i];
-        this.sector1[i].id = ejercito.nombre + i;
+        this.sector1[i].id = ejercito.id + i;
       } else {
         this.sector2[i] = ejercito.listaNaves[i];
-        this.sector2[i].id = ejercito.nombre + i;
+        this.sector2[i].id = ejercito.id + i;
       }
     }
   }
@@ -171,11 +171,7 @@ class CampoDeBatalla {
         '" alt="' +
         element1.nombre +
         '"></li>';
-        for (let x = 0; x < this.sector1.length; x++) {
-          if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
-
-          
-        }
+        
       }
     
 
@@ -196,10 +192,9 @@ class CampoDeBatalla {
         '" alt="' +
         element2.nombre +
         '"></li>';
-        for (let x = 0; x < this.sector2.length; x++) {
-          if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
+       
           
-        }
+        
       }
     }
   
@@ -208,21 +203,21 @@ class CampoDeBatalla {
     let d_nested = document.getElementById(this.sector1[posicion].id);
     let d_nested2 = document.getElementById(this.sector2[posicion].id);
 
-    // if (ejercito.id == "arriba") {
-    //   d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
-    // } else {
-    //   d_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
-    // }
+     if (ejercito === this.sector1) {
+       d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
+     } else {
+     d_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
+    }
 
-    setTimeout(function() {
-      if (ejercito.id == "arriba") {
-      d.removeChild(d_nested);} else {
-        d.removeChild(d_nested2);
-      }
-    }, 1000);
+    // setTimeout(function() {
+    //   if (ejercito === this.sector1) {
+    //   d.removeChild(d_nested);} else {
+    //     d.removeChild(d_nested2);
+    //   }
+    // }, 1000);
 
-    // Borra 1 elemento desde la posicion
-    if (ejercito.id == "arriba") {
+    
+    if (ejercito === this.sector1) {
       this.sector1.splice(posicion, 1);
       
     } else {
