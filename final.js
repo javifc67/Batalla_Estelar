@@ -174,7 +174,6 @@ class CampoDeBatalla {
         '"></li>';
         for (let x = 0; x < this.sector1.length; x++) {
           if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
-          this.BorrarNave(ejercito1, x)
 
           
         }
@@ -195,7 +194,7 @@ class CampoDeBatalla {
         '"></li>';
         for (let x = 0; x < this.sector2.length; x++) {
           if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
-          this.BorrarNave(ejercito2, x)
+          
         }
       }
     
@@ -246,8 +245,10 @@ class CampoDeBatalla {
           );
         }
         for (let x = 0; x < this.sector1.length; x++) {
-          if (this.sector1[x].vida < 1) this.sector1.splice(x, 1);
-        }
+          if (this.sector1[x].vida < 1) {
+            this.sector1.splice(x, 1);
+          this.BorrarNave(ejercito1, x)
+        }}
       } else {
         if (this.sector2[0] != undefined) {
           this.sector2[0].Disparar(
@@ -258,8 +259,9 @@ class CampoDeBatalla {
           );
         }
         for (let x = 0; x < this.sector2.length; x++) {
-          if (this.sector2[x].vida < 1) this.sector2.splice(x, 1);
-        }
+          if (this.sector2[x].vida < 1) {this.sector2.splice(x, 1);
+          this.BorrarNave(ejercito2, x)
+        }}
       }
       if (turno == 0) {
         turno = 1;
@@ -273,15 +275,14 @@ class CampoDeBatalla {
       /* verdad=true;
       verdad=!verdad; */
     
-    if(this.sector1.length >= 1 && this.sector2.length >= 1){
 
-      this.ObtenerElementosEnPosicion();
+      
       if (this.sector1.length >= 1) {
         console.log("Ganó " + equipo1.nombre);
-      } else {
+      } if (this.sector2.length >= 1){
         console.log("Ganó " + equipo2.nombre);
       }
-    }
+    
   }
 
   ObtenerElementosEnPosicion() {
@@ -345,4 +346,7 @@ console.log(naboo.sector1[0].vida);*/
 //
 function disparar(){
   naboo.Turno(equipo1, equipo2)
+}
+function Inf(){
+  naboo.ObtenerElementosEnPosicion();
 }
