@@ -55,21 +55,38 @@ class Ejercito {
     this.tacticas = [];
     this.id = id;
   }
-  InformeDeSituacion(atacante, defensor, posicion1, posicion2) {
+  InformeDeSituacion1(posicion1, posicion2) {
     console.log(
-      atacante.listadoNaves[posicion1].nombre +
+      this.sector1[posicion1].nombre +
         " con " +
-        atacante.listadoNaves[posicion1].dolor +
+        this.sector1[posicion1].dolor +
         " de daño" +
         " de " +
-        atacante.nombre +
+        equipo1.nombre +
         " dispara a la " +
-        defensor.sector.poscionNaves[posicion2].nombre +
+        this.sector2[posicion2].nombre +
         " con " +
-        defensor.sector.poscionNaves[posicion2].escudo +
+        this.sector2[posicion2].vida +
         " de vida" +
         " de " +
-        defensor.nombre
+        equipo2.nombre
+    );
+  }
+  InformeDeSituacion2(posicion1, posicion2) {
+    console.log(
+      this.sector2[posicion1].nombre +
+        " con " +
+        this.sector2[posicion1].dolor +
+        " de daño" +
+        " de " +
+        equipo2.nombre +
+        " dispara a la " +
+        this.sector1[posicion2].nombre +
+        " con " +
+        this.sector1[posicion2].vida +
+        " de vida" +
+        " de " +
+        equipo1.nombre
     );
   }
   CambiarDeTactica(tactica) {}
@@ -171,9 +188,7 @@ class CampoDeBatalla {
         '" alt="' +
         element1.nombre +
         '"></li>';
-        
-      }
-    
+    }
 
     for (let index2 = 0; index2 < this.sector2.length; index2++) {
       let div2 = document.getElementById(ejercito2.id);
@@ -192,44 +207,36 @@ class CampoDeBatalla {
         '" alt="' +
         element2.nombre +
         '"></li>';
-       
-          
-        
-      }
     }
-  
+  }
+
   BorrarNave(ejercito, posicion) {
     let d = document.getElementById(equipo1.id);
     let d2 = document.getElementById(equipo2.id);
     let d_nested = document.getElementById(this.sector1[posicion].id);
-    let d2_nested2 = document.getElementById(this.sector2[posicion].id);
+    let d_nested2 = document.getElementById(this.sector2[posicion].id);
 
-     if (ejercito == this.sector1) {
-       d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
-     } else {
-     d2_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
+    if (ejercito == this.sector1) {
+      d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
+    } else {
+      d_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
     }
 
-     setTimeout(function() {
-       if (d == document.getElementById(equipo1.id)) {
-       d.removeChild(d_nested);
+    setTimeout(function() {
+      if (ejercito == this.sector1) {
+        d.removeChild(d_nested);
       } else {
-         d2.removeChild(d2_nested2);
-       }
-     }, 1000);
+        d2.removeChild(d_nested2);
+      }
+    }, 1000);
 
-    
     if (ejercito == this.sector1) {
       this.sector1.splice(posicion, 1);
-      
     } else {
       this.sector2.splice(posicion, 1);
     }
   }
 
-  
-    
-      
   Turno() {
     if (this.turno == 0) {
       if (this.sector1[0] != undefined) {
@@ -238,11 +245,11 @@ class CampoDeBatalla {
           0,
           this.sector2.length,
           this.sector1[0].precision
-          
         );
         for (let x = 0; x < this.sector1.length; x++) {
-          if (this.sector1[x].vida < 1){
-            this.BorrarNave(this.sector1, x)
+          if (this.sector1[x].vida < 1) {
+            this.InformeDeSituacion(this.sector1, this.sector2, x, y);
+            this.BorrarNave(this.sector1, x);
           }
         }
       }
@@ -254,9 +261,10 @@ class CampoDeBatalla {
           this.sector1.length,
           this.sector2[0].precision
         );
-        for (let x = 0; x < this.sector2.length; x++) {
-          if (this.sector2[x].vida < 1) {
-            this.BorrarNave(this.sector2, x)
+        for (let y = 0; y < this.sector2.length; y++) {
+          if (this.sector2[y].vida < 1) {
+            this.InformeDeSituacion(this.sector2, this.sector1, y, x);
+            this.BorrarNave(this.sector2, y);
           }
         }
       }
@@ -264,11 +272,9 @@ class CampoDeBatalla {
     if (this.turno == 0) {
       this.turno = 1;
       console.log("TURNO DE " + equipo1.nombre);
-      this.ObtenerElementosEnPosicion();
     } else {
       this.turno = 0;
       console.log("TURNO DE " + equipo2.nombre);
-      this.ObtenerElementosEnPosicion();
     }
     /* verdad=true;
       verdad=!verdad; */
@@ -284,11 +290,15 @@ class CampoDeBatalla {
   ObtenerElementosEnPosicion() {
     console.log(equipo1.nombre);
     this.sector1.forEach(element => {
-      console.log(element);
+      consola.innerHTML +=
+        "Nombre: " + element.nombre + "  Vida: " + element.vida;
     });
     console.log(equipo2.nombre);
     this.sector2.forEach(element => {
-      console.log(element);
+      /* console.log(element); */
+      consola.innerHTML +=
+      '<p> "Nombre: "' + element.nombre + '  Vida: ' + element.vida ' <p>';
+        
     });
   }
 }
@@ -298,10 +308,10 @@ const equipo1 = factorio.CrearEjercito(
   "EL IMPERIO",
   "arriba",
   "Caza TIE",
-  3,
+  5,
   "1.png",
   "Bombardero TIE",
-  2,
+  5,
   "1.png",
   "Interceptor TIE",
   5,
@@ -310,14 +320,14 @@ const equipo1 = factorio.CrearEjercito(
 const equipo2 = factorio.CrearEjercito(
   "LOS REBELDES",
   "abajo",
-  "Caza estelar X-Wing T-65B",
-  2,
+  "Caza estelar Ala-X",
+  5,
   "1.png",
-  "Caza estelar bombardero BTL-A4 Ala-Y",
+  "Caza estelar bombardero",
   5,
   "1.png",
   "Caza estelar Ala-A",
-  3,
+  5,
   "1.png"
 );
 let naboo = new CampoDeBatalla(
@@ -339,9 +349,9 @@ console.log(naboo.sector1.length);
 
 console.log(naboo.sector1[0].vida);*/
 //
-function disparar(){
-  naboo.Turno(equipo1, equipo2)
+function disparar() {
+  naboo.Turno(equipo1, equipo2);
 }
-function Inf(){
+function Inf() {
   naboo.ObtenerElementosEnPosicion();
 }
