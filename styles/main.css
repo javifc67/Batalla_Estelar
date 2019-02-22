@@ -18,6 +18,7 @@ main{
 .container{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 #campodebatalla{
     display: flex;
@@ -78,4 +79,6 @@ button:hover{
     width:20%;
     background-color: black;
     font-family: var(--second);
+    max-height: 404px;
+    overflow:auto;
 }
