@@ -3,7 +3,7 @@
 <head>
 <script>
     
-    function scroll(){
+    function scrol(){
         window.scrollTo(0, 500);
     }
 </script>
@@ -45,9 +45,20 @@
 <div class="container">
     <button id="disparar" onclick="disparar     ();">Disparar</button>
     <button onclick="Inf();"></button>
-    <button onclick="scroll();">Pureba</button>
+    <button onclick="move_down();">Pureba</button>
 </div>
+<br> <br> <br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br><br> <br>
 </main>
 <script src="final.js"></script>
+<script>
+    var myElement = document.getElementById('consola');
+    var topPos = myElement.offsetTop;
+    function scroll(){
+        document.getElementById('consola').scrollTop = topPos;  
+        
+        
+    }
+    
+</script>
 </body>
 </html>

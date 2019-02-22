@@ -366,5 +366,7 @@ function Inf() {
   naboo.ObtenerElementosEnPosicion();
 }
 
-  
+function move_down() {
+  document.getElementById("consola").scrollTop -= 10;
+}
 
