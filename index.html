@@ -38,10 +38,20 @@
     <!-- BOTONES -->
 <div class="container">
     <button id="disparar" onclick="disparar     ();">Disparar</button>
-    <button onclick="naboo.ObtenerElementosEnPosicion();"></button>
-    <button>Pureba</button>
+    <button onclick="Inf();"></button>
+    <button onclick="scroll();">Pureba</button>
 </div>
 </main>
 <script src="final.js"></script>
+<script>
+    
+    function scroll(){
+        consola.scrollTo({
+            top: 100,
+            left: 100,
+            behavior: 'smooth'
+        });
+    }
+</script>
 </body>
 </html>

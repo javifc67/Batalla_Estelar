@@ -365,3 +365,6 @@ function disparar() {
 function Inf() {
   naboo.ObtenerElementosEnPosicion();
 }
+
+  
+
