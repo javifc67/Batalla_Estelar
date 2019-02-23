@@ -26,11 +26,11 @@ class Nave {
       return;
     }
     if (equipo == 1) {
-      naboo.sector1[objetivo].vida -= dolor;
       equipo1.InformeDeSituacion1(naboo.sector1, naboo.sector2,objetivo);
+      naboo.sector1[objetivo].vida -= dolor;
     } else {
+      equipo2.InformeDeSituacion2(naboo.sector2, naboo.sector1,objetivo);
       naboo.sector2[objetivo].vida -= dolor;
-      equipo1.InformeDeSituacion2(naboo.sector2, naboo.sector1,objetivo);
     }
   }
 }
@@ -226,7 +226,7 @@ class CampoDeBatalla {
       d_nested2.innerHTML = '<img src="explosion.png" alt="Pum!">';
     }
     let p = this.sector1
-    setTimeout(p,function(p) {
+    setTimeout(function() {
       if (ejercito == p) {
         d.removeChild(d_nested);
       } else {
@@ -276,11 +276,11 @@ class CampoDeBatalla {
     if (this.turno == 0) {
       this.turno = 1;
       consola.innerHTML +=
-      '<p>TURNO DE: '+ equipo1.nombre+' </p>';
+      '<p>TURNO DE: '+ equipo2.nombre+' </p>';
     } else {
       this.turno = 0;
       consola.innerHTML +=
-      '<p>TURNO DE: '+ equipo2.nombre+' </p>';
+      '<p>TURNO DE: '+ equipo1.nombre+' </p>';
     }
     /* verdad=true;
       verdad=!verdad; */
@@ -366,5 +366,7 @@ function Inf() {
   naboo.ObtenerElementosEnPosicion();
 }
 
-  
+function move_down() {
+  document.getElementById("consola").scrollTop -= 10;
+}
 
