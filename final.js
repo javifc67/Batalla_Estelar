@@ -217,7 +217,7 @@ class CampoDeBatalla {
   BorrarNave(ejercito, posicion) {
     let d = document.getElementById(equipo1.id);
     let d2 = document.getElementById(equipo2.id);
-    let d_nested = document.getElementById(this.sector1[posicion].id);
+    let d_nested = document.getElementById(this.sector1[posicion].id); // aquiiiiiiiiiiiiiiiiiiiiiiiiiii
     let d_nested2 = document.getElementById(this.sector2[posicion].id);
 
     if (ejercito == this.sector1) {
