@@ -347,6 +347,7 @@ let naboo = new CampoDeBatalla(
 naboo.ColocarNaves(equipo1);
 naboo.ColocarNaves(equipo2);
 function Empezar() {
+  main.innerHTML += ' <div class="container"> <div id="campodebatalla"> <!-- TABLA DEL EQUIPO 1 --> <div class="equipo1"> <ul id="arriba"> </ul> </div> <!-- TABLA DEL EQUIPO 2 --> <div class="equipo2"> <ul id="abajo"> </ul> </div> </div><!--campo de batalla--> <div class="consola"> <aside> <div id="consola"> </div> </aside> </div><!--consola--> </div><!--container--> <!-- BOTONES --> <div class="container"> <button id="disparar" onclick="disparar     ();">Disparar</button> <button onclick="Inf();"></button> <button onclick="scroll();">Pureba</button> </div> ';
   naboo.InsertToHtml(equipo1, equipo2);
 }
 
