@@ -82,3 +82,36 @@ button:hover{
     max-height: 404px;
     overflow:auto;
 }
+.seleccionDeNaves,
+.numeroDeNaves{
+    display: flex;
+    flex-direction: column;
+    /* border: 10px solid blue; */
+    text-align: center;
+}
+.numeroDeNaves{
+    margin-top: 10rem;
+}
+.seleccionDeNaves p,
+.numeroDeNaves p{
+    font-size: 3rem;
+    font-family: var(--second);
+}
+.seleccionDeNaves select{
+    padding: 1.5rem, 2.5rem;
+}
+.numeroDeNaves input{
+    padding: 3rem;
+    font-size:1.2rem;
+    text-align: center;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.cabeceras{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
