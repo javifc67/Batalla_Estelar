@@ -17,7 +17,7 @@ class Nave {
     if (Math.random() * (100 - 0) + 0 < precision) {
       return Math.floor(objetivo);
     } else {
-      consola.innerHTML += '<p> disparo fallado </p>';
+      consola.insertAdjacentHTML('afterbegin', '<p> disparo fallado </p>');
       return -1;
     }
   }
@@ -58,7 +58,7 @@ class Ejercito {
     this.id = id;
   } 
   InformeDeSituacion1(ataca,defiende,posicion) {
-    consola.innerHTML += '<p> ' +
+    consola.insertAdjacentHTML('afterbegin', '<p> ' +
       ataca[0].nombre +
         " con " +
         ataca[0].dolor +
@@ -71,24 +71,23 @@ class Ejercito {
         defiende[posicion].vida +
         " de vida" +
         " de " +
-        equipo2.nombre + '</p>'
-    ;
+        equipo2.nombre + '</p>')    ;
   }
   InformeDeSituacion2(ataca, defiende,posicion) {
-    consola.innerHTML += '<p> '+
-      ataca[0].nombre +
-        " con " +
-        ataca[0].dolor +
-        " de daño" +
-        " de " +
-        equipo2.nombre +
-        " dispara al " +
-        defiende[posicion].nombre +
-        " con " +
-        defiende[posicion].vida +
-        " de vida" +
-        " de " +
-        equipo1.nombre + '</p>'
+    consola.insertAdjacentHTML('afterbegin', '<p> '+
+    ataca[0].nombre +
+      " con " +
+      ataca[0].dolor +
+      " de daño" +
+      " de " +
+      equipo2.nombre +
+      " dispara al " +
+      defiende[posicion].nombre +
+      " con " +
+      defiende[posicion].vida +
+      " de vida" +
+      " de " +
+      equipo1.nombre + '</p>'); 
     ;
   }
   CambiarDeTactica(tactica) {}
@@ -275,39 +274,39 @@ class CampoDeBatalla {
     }
     if (this.turno == 0) {
       this.turno = 1;
-      consola.innerHTML +=
-      '<p>TURNO DE: '+ equipo2.nombre+' </p>';
+      consola.insertAdjacentHTML('afterbegin',
+      '<p>TURNO DE: '+ equipo2.nombre+' </p>');
     } else {
       this.turno = 0;
-      consola.innerHTML +=
-      '<p>TURNO DE: '+ equipo1.nombre+' </p>';
+      consola.insertAdjacentHTML('afterbegin',
+      '<p>TURNO DE: '+ equipo1.nombre+' </p>');
     }
     /* verdad=true;
       verdad=!verdad; */
 
     if (this.sector2.length < 1) {
-      consola.innerHTML +=
-      '<p>Ganó: '+ equipo1.nombre+' </p>'
+      consola.insertAdjacentHTML('afterbegin',
+      '<p>Ganó: '+ equipo1.nombre+' </p>');
     }
     if (this.sector1.length < 1) {
-      consola.innerHTML +=
-      '<p>Ganó: '+ equipo2.nombre+' </p>'
+      consola.insertAdjacentHTML('afterbegin',
+      '<p>Ganó: '+ equipo2.nombre+' </p>');
     }
   }
 
   ObtenerElementosEnPosicion() {
-    consola.innerHTML +=
-      '<p>'+ equipo1.nombre+' </p>'
+    consola.insertAdjacentHTML('afterbegin',
+      '<p>'+ equipo1.nombre+' </p>');
     this.sector1.forEach(element => {
-      consola.innerHTML +=
-      '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>';
+      consola.insertAdjacentHTML('afterbegin',
+      '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
     });
-    consola.innerHTML +=
-    '<p>'+ equipo2.nombre+' </p>'
+    consola.insertAdjacentHTML('afterbegin',
+    '<p>'+ equipo2.nombre+' </p>');
     this.sector2.forEach(element => {
       /* console.log(element); */
-      consola.innerHTML +=
-      '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>';
+      consola.insertAdjacentHTML('afterbegin',
+      '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
         
     });
   }
