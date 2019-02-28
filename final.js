@@ -161,9 +161,9 @@ class Factorio {
   }
 }
 class CampoDeBatalla {
-  constructor(nNaves, nNaves2) {
-    this.sector1 = [nNaves];
-    this.sector2 = [nNaves2];
+  constructor() {
+    this.sector1 = [];
+    this.sector2 = [];
     this.posicion1 = 0;
     this.posicion2 = 0;
   }
@@ -218,6 +218,9 @@ class CampoDeBatalla {
     let d2 = document.getElementById(equipo2.id);
     let d_nested = document.getElementById(this.sector1[posicion].id);
     let d_nested2 = document.getElementById(this.sector2[posicion].id);
+    if (d_nested2 == undefined){
+      d_nested2 = this.sector2[0].id
+    }
 
     if (ejercito == this.sector1) {
       d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
@@ -313,40 +316,55 @@ class CampoDeBatalla {
 }
 const factorio = new Factorio();
 
-const equipo1 = factorio.CrearEjercito(
-  "EL IMPERIO",
-  "arriba",
-  "Caza TIE",
-  3,
-  "1.png",
-  "Bombardero TIE",
-  3,
-  "1.png",
-  "Interceptor TIE",
-  3,
-  "1.png"
-);
-const equipo2 = factorio.CrearEjercito(
-  "LOS REBELDES",
-  "abajo",
-  "Caza estelar Ala-X",
-  3,
-  "1.png",
-  "Caza estelar bombardero",
-  3,
-  "1.png",
-  "Caza estelar Ala-A",
-  3,
-  "1.png"
-);
-let naboo = new CampoDeBatalla(
-  equipo1.listaNaves.length,
-  equipo2.listaNaves.length
-);
-naboo.ColocarNaves(equipo1);
-naboo.ColocarNaves(equipo2);
-function Empezar() {
-  body.removeChild('body')
+function   crearEquipo1(nnaves1,nnaves2,nnaves3){
+  
+   equipo1 = factorio.CrearEjercito(
+    "EL IMPERIO",
+    "arriba",
+    "Caza TIE",
+    nnaves1,
+    "1.png",
+    "Bombardero TIE",
+    nnaves2,
+    "1.png",
+    "Interceptor TIE",
+    nnaves3,
+    "1.png"
+    );
+    return equipo1
+  }
+  function crearEquipo2(nnaves4,nnaves5,nnaves6){
+         equipo2 = factorio.CrearEjercito(
+          "LOS REBELDES",
+          "abajo",
+          "Caza estelar Ala-X",
+          nnaves4,
+          "1.png",
+          "Caza estelar bombardero",
+          nnaves5,
+          "1.png",
+          "Caza estelar Ala-A",
+          nnaves6,
+          "1.png"
+          );
+          return equipo2
+    }
+    const naboo = new CampoDeBatalla();
+    function Empezar() {
+      const nnaves1 = document.empezar.uno.value
+      const nnaves2 = document.empezar.dos.value
+      const nnaves3 = document.empezar.tres.value
+      const nnaves4 = document.empezar.cuatro.value
+      const nnaves5 = document.empezar.cinco.value
+      const nnaves6 = document.empezar.seis.value
+      
+      const equipo1 = crearEquipo1(nnaves1,nnaves2,nnaves3);
+      const equipo2 = crearEquipo2(nnaves4,nnaves5,nnaves6);
+      naboo.ColocarNaves(equipo2);
+      naboo.ColocarNaves(equipo1);
+
+  const doc = document.querySelector('main');
+  doc.children[0].remove();
   main.innerHTML += ' <div class="container"> <div id="campodebatalla"> <!-- TABLA DEL EQUIPO 1 --> <div class="equipo1"> <ul id="arriba"> </ul> </div> <!-- TABLA DEL EQUIPO 2 --> <div class="equipo2"> <ul id="abajo"> </ul> </div> </div><!--campo de batalla--> <div class="consola"> <aside> <div id="consola"> </div> </aside> </div><!--consola--> </div><!--container--> <!-- BOTONES --> <div class="container"> <button id="disparar" onclick="disparar     ();">Disparar</button> <button onclick="Inf();"></button> <button onclick="scroll();">Pureba</button> </div> ';
   naboo.InsertToHtml(equipo1, equipo2);
 }
@@ -366,8 +384,7 @@ function disparar() {
 function Inf() {
   naboo.ObtenerElementosEnPosicion();
 }
+const num = document.empezar.uno.value
+console.log(num);
 
-function move_down() {
-  document.getElementById("consola").scrollTop -= 10;
-}
 
