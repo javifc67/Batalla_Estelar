@@ -288,12 +288,19 @@ class CampoDeBatalla {
       verdad=!verdad; */
 
     if (this.sector2.length < 1) {
-      consola.insertAdjacentHTML('afterbegin',
-      '<p>Ganó: '+ equipo1.nombre+' </p>');
+      setTimeout(function() {
+        const doc = document.querySelector('main');
+        doc.children[0].remove();
+        main.innerHTML += '<h1> VICTORIA DEL IMPERIO';
+      }, 1000);
     }
     if (this.sector1.length < 1) {
-      consola.insertAdjacentHTML('afterbegin',
-      '<p>Ganó: '+ equipo2.nombre+' </p>');
+      setTimeout(function() {
+        const doc = document.querySelector('main');
+        doc.children[0].remove();
+        main.innerHTML += '<h1> VICTORIA DE LOS REBELDES';
+        
+      }, 1000);
     }
   }
 
@@ -365,7 +372,7 @@ function   crearEquipo1(nnaves1,nnaves2,nnaves3){
 
   const doc = document.querySelector('main');
   doc.children[0].remove();
-  main.innerHTML += ' <div class="container"> <div id="campodebatalla"> <!-- TABLA DEL EQUIPO 1 --> <div class="equipo1"> <ul id="arriba"> </ul> </div> <!-- TABLA DEL EQUIPO 2 --> <div class="equipo2"> <ul id="abajo"> </ul> </div> </div><!--campo de batalla--> <div class="consola"> <aside> <div id="consola"> </div> </aside> </div><!--consola--> </div><!--container--> <!-- BOTONES --> <div class="container"> <button id="disparar" onclick="disparar     ();">Disparar</button> <button onclick="Inf();"></button> <button onclick="scroll();">Pureba</button> </div> ';
+  main.innerHTML += ' <div class="container"> <div id="campodebatalla"> <!-- TABLA DEL EQUIPO 1 --> <div class="equipo1"> <ul id="arriba"> </ul> </div> <!-- TABLA DEL EQUIPO 2 --> <div class="equipo2"> <ul id="abajo"> </ul> </div> </div><!--campo de batalla--> <div class="consola"> <aside> <div id="consola"> </div> </aside> </div><!--consola--> </div><!--container--> <!-- BOTONES --> <div class="container"> <button id="disparar" onclick="disparar     ();">Disparar</button> <button onclick="Inf();">Estado de las naves</button> </div> ';
   naboo.InsertToHtml(equipo1, equipo2);
 }
 
