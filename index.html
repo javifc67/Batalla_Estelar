@@ -11,39 +11,40 @@
 </head>
 <body id="body">
 <main id="main">
-    <form name="empezar">
+    <form action="final.js" name="empezar" id="empezar">
     
         <h1>Elige tus naves</h1>
         <div class="seleccionDeNaves">
-            <div class="equipos">
-                <h3>El Imperio</h3>
-                <h3 >Los Rebeldes</h3>
-            </div><!--equipos-->
-            <div class="naves">
-                <div class="navesimperio">
-                    <p>Nave 1 <input type="number" max="7" min="1" cols="1" rows="1"></p>
-                    <p>Nave 2 <input type="number" max="7" min="1" cols="1" rows="1"></p>
-                    <p>Nave 3 <input type="number" max="7" min="1" cols="1" rows="1"></p>
-                </div>
-                <div class="navesrebeldes">
-                    <p>Nave 1 <input type="number" max="7" min="1" cols="1" rows="1"></p>
-                    <p>Nave 2 <input type="number" max="7" min="1" cols="1" rows="1"></p>
-                    <p>Nave 3 <input type="number" max="7" min="1" cols="1" rows="1"></p>
-                </div>
-            </div><!--naves-->
-        </div><!--seleccionDeNaves-->
-        
-        <!-- BOTON DE EMPEZAR -->
-        <div class="empezar">
-            <button onclick="Empezar()">Empezar partida!</button>
+   <div class="equipos">
+       <h3>El Imperio</h3>
+       <h3>Los Rebeldes</h3>
+    </div><!--equipos-->
+    <div class="naves">
+        <div class="navesimperio">
+            <p>Nave 1 <input type="number" max="7" min="1" cols="1" rows="1" name="uno" value="" required></p>
+            <p>Nave 2 <input type="number" max="7" min="1" cols="1" rows="1" name="dos" value="" required></p>
+            <p>Nave 3 <input type="number" max="7" min="1" cols="1" rows="1" name="tres" value=""></p>
         </div>
-    </main>
+        <div class="navesrebeldes">
+            <p>Nave 1 <input type="number" max="7" min="1" cols="1" rows="1" name="cuatro" value=""></p>
+            <p>Nave 2 <input type="number" max="7" min="1" cols="1" rows="1" name="cinco" value=""></p>
+            <p>Nave 3 <input type="number" max="7" min="1" cols="1" rows="1" name="seis" value=""></p>
+        </div>
+   </div><!--naves-->
+</div><!--seleccionDeNaves-->
+
+<!-- BOTON DE EMPEZAR -->
+<div class="empezar">
+    <button onclick="Empezar()">Empezar partida!</button>
+</div>
+
+</main>
 
 
     
 </body>
 <script src="final.js"></script>
 
-    
 
+</script>
 </html>

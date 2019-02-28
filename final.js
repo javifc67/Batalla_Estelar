@@ -161,9 +161,9 @@ class Factorio {
   }
 }
 class CampoDeBatalla {
-  constructor(nNaves, nNaves2) {
-    this.sector1 = [nNaves];
-    this.sector2 = [nNaves2];
+  constructor() {
+    this.sector1 = [];
+    this.sector2 = [];
     this.posicion1 = 0;
     this.posicion2 = 0;
   }
@@ -216,8 +216,20 @@ class CampoDeBatalla {
   BorrarNave(ejercito, posicion) {
     let d = document.getElementById(equipo1.id);
     let d2 = document.getElementById(equipo2.id);
-    let d_nested = document.getElementById(this.sector1[posicion].id); // aquiiiiiiiiiiiiiiiiiiiiiiiiiii
-    let d_nested2 = document.getElementById(this.sector2[posicion].id);
+    let d_nested = null;
+    if (this.sector1[posicion] == undefined){
+      d_nested = document.getElementById(this.sector1[0].id);
+    } else {
+
+      d_nested = document.getElementById(this.sector1[posicion].id); 
+    }
+    let d_nested2 = null;
+    if (this.sector2[posicion] == undefined){
+      d_nested2 = document.getElementById(this.sector2[0].id);
+    } else {
+
+      d_nested2 = document.getElementById(this.sector2[posicion].id); 
+    }
 
     if (ejercito == this.sector1) {
       d_nested.innerHTML = '<img src="explosion.png" alt="Pum!">';
@@ -255,113 +267,125 @@ class CampoDeBatalla {
             this.BorrarNave(this.sector1, this.posicion1);
           }
         }
-      }
-    } else {
-      if (this.sector2[0] != undefined) {
-        this.sector2[0].Disparar(
-          this.sector2[0].dolor,
-          1,
-          this.sector1.length,
-          this.sector2[0].precision
-        );
-        for (this.posicion2 = 0; this.posicion2 < this.sector2.length; this.posicion2++) {
-          if (this.sector2[this.posicion2].vida < 1) {
-            
-            this.BorrarNave(this.sector2, this.posicion2);
-          }
-        }
-      }
+      }  consola.insertAdjacentHTML('afterbegin',
+  '<p>TURNO DE: '+ equipo2.nombre+' </p>');
+      } else {
+        if (this.sector2[0] != undefined) {
+          this.sector2[0].Disparar(
+            this.sector2[0].dolor,
+            1,
+            this.sector1.length,
+            this.sector2[0].precision
+            );
+            for (this.posicion2 = 0; this.posicion2 < this.sector2.length; this.posicion2++) {
+              if (this.sector2[this.posicion2].vida < 1) {
+                
+                this.BorrarNave(this.sector2, this.posicion2);
+              }
+            }
+          } consola.insertAdjacentHTML('afterbegin',
+          '<p>TURNO DE: '+ equipo1.nombre+' </p>');
     }
     if (this.turno == 0) {
       this.turno = 1;
-      consola.insertAdjacentHTML('afterbegin',
-      '<p>TURNO DE: '+ equipo2.nombre+' </p>');
+      
     } else {
       this.turno = 0;
-      consola.insertAdjacentHTML('afterbegin',
-      '<p>TURNO DE: '+ equipo1.nombre+' </p>');
+     
     }
     /* verdad=true;
       verdad=!verdad; */
 
     if (this.sector2.length < 1) {
-      consola.insertAdjacentHTML('afterbegin',
-      '<p>Ganó: '+ equipo1.nombre+' </p>');
+      setTimeout(function() {
+        const doc = document.querySelector('main');
+        doc.children[0].remove();
+        main.innerHTML += '<h1> VICTORIA DEL IMPERIO';
+      }, 1000);
     }
     if (this.sector1.length < 1) {
-      consola.insertAdjacentHTML('afterbegin',
-      '<p>Ganó: '+ equipo2.nombre+' </p>');
+      setTimeout(function() {
+        const doc = document.querySelector('main');
+        doc.children[0].remove();
+        main.innerHTML += '<h1> VICTORIA DE LOS REBELDES';
+        
+      }, 1000);
     }
   }
 
   ObtenerElementosEnPosicion() {
-    consola.insertAdjacentHTML('afterbegin',
-      '<p>'+ equipo1.nombre+' </p>');
     this.sector1.forEach(element => {
       consola.insertAdjacentHTML('afterbegin',
       '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
     });
     consola.insertAdjacentHTML('afterbegin',
-    '<p>'+ equipo2.nombre+' </p>');
-    this.sector2.forEach(element => {
-      /* console.log(element); */
-      consola.insertAdjacentHTML('afterbegin',
-      '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
+      '<p>'+ equipo1.nombre+' </p>');
+      this.sector2.forEach(element => {
+        /* console.log(element); */
+        consola.insertAdjacentHTML('afterbegin',
+        '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
         
-    });
+      });
+      consola.insertAdjacentHTML('afterbegin',
+      '<p>'+ equipo2.nombre+' </p>');
   }
 }
 const factorio = new Factorio();
 
-const equipo1 = factorio.CrearEjercito(
-  "EL IMPERIO",
-  "arriba",
-  "Caza TIE",
-  3,
-  "images/2.png",
-  "Bombardero TIE",
-  3,
-  "images/4.jpg",
-  "Interceptor TIE",
-  3,
-  "images/5.jpg"
-);
-const equipo2 = factorio.CrearEjercito(
-  "LOS REBELDES",
-  "abajo",
-  "Caza estelar Ala-X",
-  3,
-  "images/45.png",
-  "Caza estelar bombardero",
-  3,
-  "images/45.png",
-  "Caza estelar Ala-A",
-  3,
-  "images/45.png"
-  );
-  let naboo = new CampoDeBatalla(
-    equipo1.listaNaves.length,
-    equipo2.listaNaves.length
+function   crearEquipo1(nnaves1,nnaves2,nnaves3){
+  
+   equipo1 = factorio.CrearEjercito(
+    "EL IMPERIO",
+    "arriba",
+    "Caza TIE",
+    nnaves1,
+    "images/2.png",
+    "Bombardero TIE",
+    nnaves2,
+    "images/3.png",
+    "Interceptor TIE",
+    nnaves3,
+    "images/4.ico"
     );
-    naboo.ColocarNaves(equipo1);
-    naboo.ColocarNaves(equipo2);
-    
-function Empezar() {
-  
-  
-  main.innerHTML += ' <div class="container"> <div id="campodebatalla"> <!-- TABLA DEL EQUIPO 1 --> <div class="equipo1"> <ul id="arriba"> </ul> </div> <!-- TABLA DEL EQUIPO 2 --> <div class="equipo2"> <ul id="abajo"> </ul> </div> </div><!--campo de batalla--> <div class="consola"> <aside> <div id="consola"> </div> </aside> </div><!--consola--> </div><!--container--> <!-- BOTONES --> <div class="container"> <button id="disparar" onclick="disparar     ();">Disparar</button> <button onclick="Inf();"></button> <button onclick="scroll();">Pureba</button> </div> ';
+    return equipo1
+  }
+  function crearEquipo2(nnaves4,nnaves5,nnaves6){
+         equipo2 = factorio.CrearEjercito(
+          "LOS REBELDES",
+          "abajo",
+          "Caza estelar Ala-X",
+          nnaves4,
+          "images/45.png",
+          "Caza estelar bombardero",
+          nnaves5,
+          "images/1.png",
+          "Caza estelar Ala-A",
+          nnaves6,
+          "images/4.png"
+          );
+          return equipo2
+    }
+    const naboo = new CampoDeBatalla();
+    function Empezar() {
+      const nnaves1 = document.empezar.uno.value
+      const nnaves2 = document.empezar.dos.value
+      const nnaves3 = document.empezar.tres.value
+      const nnaves4 = document.empezar.cuatro.value
+      const nnaves5 = document.empezar.cinco.value
+      const nnaves6 = document.empezar.seis.value
+      
+      const equipo1 = crearEquipo1(nnaves1,nnaves2,nnaves3);
+      const equipo2 = crearEquipo2(nnaves4,nnaves5,nnaves6);
+      naboo.ColocarNaves(equipo2);
+      naboo.ColocarNaves(equipo1);
+
+  const doc = document.querySelector('main');
+  doc.children[0].remove();
+  main.innerHTML += ' <div class="container"> <div id="campodebatalla"> <!-- TABLA DEL EQUIPO 1 --> <div class="equipo1"> <ul id="arriba"> </ul> </div> <!-- TABLA DEL EQUIPO 2 --> <div class="equipo2"> <ul id="abajo"> </ul> </div> </div><!--campo de batalla--> <div class="consola"> <aside> <div id="consola"> </div> </aside> </div><!--consola--> </div><!--container--> <!-- BOTONES --> <div class="container"> <button id="disparar" onclick="disparar     ();">Disparar</button> <button onclick="Inf();">Estado de las naves</button> </div> ';
   naboo.InsertToHtml(equipo1, equipo2);
 }
 
-/* naboo.sector1[0].vida = 0; 
-console.log(naboo.sector1.length);
-if (naboo.sector1[0].vida < 1) {
-  naboo.sector1.shift();
-}
-console.log(naboo.sector1.length);
 
-console.log(naboo.sector1[0].vida);*/
-//
 function disparar() {
   naboo.Turno(equipo1, equipo2);
 }
