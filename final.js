@@ -36,17 +36,17 @@ class Nave {
 }
 class Nave_I extends Nave {
   constructor(nombre, imagen) {
-    super(25, 50, nombre, 60, imagen);
+    super(25, 50, nombre, 70, imagen);
   }
 }
 class Nave_II extends Nave {
   constructor(nombre, imagen) {
-    super(40, 35, nombre, 70, imagen);
+    super(40, 35, nombre, 80, imagen);
   }
 }
 class Nave_III extends Nave {
   constructor(nombre, imagen) {
-    super(30, 40, nombre, 80, imagen);
+    super(30, 40, nombre, 90, imagen);
   }
 }
 
