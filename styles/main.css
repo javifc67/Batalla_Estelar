@@ -7,7 +7,7 @@ body{
     padding: 0;
     margin:0;
     background-color: var(--azul);
-    background-image:url(/images/fondocampobatalla.jpg);
+    background-image:url(../images/fondocampobatalla.jpg);
     color: white;
     width: 100;
 }
@@ -64,7 +64,7 @@ button{
     font-family: var(--passion);
     font-weight: 700;
     font-size: 4rem;
-    background-image: url(/images/fondo-boton.jpg);
+    background-image: url(../images/fondo-boton.jpg);
     color:var(--azul);
 }
 button:hover{
