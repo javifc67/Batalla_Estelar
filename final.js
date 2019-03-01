@@ -299,15 +299,15 @@ class CampoDeBatalla {
     if (this.sector2.length < 1) {
       setTimeout(function() {
         const doc = document.querySelector('main');
-        doc.children[0].remove();
-        main.innerHTML += '<h1> VICTORIA DEL IMPERIO';
+        
+        main.innerHTML = '<h1> VICTORIA DEL IMPERIO';
       }, 1000);
     }
     if (this.sector1.length < 1) {
       setTimeout(function() {
         const doc = document.querySelector('main');
-        doc.children[0].remove();
-        main.innerHTML += '<h1> VICTORIA DE LOS REBELDES';
+        
+        main.innerHTML = '<h1> VICTORIA DE LOS REBELDES';
         
       }, 1000);
     }
