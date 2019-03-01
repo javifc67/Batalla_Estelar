@@ -219,7 +219,7 @@ class CampoDeBatalla {
     let d_nested = document.getElementById(this.sector1[posicion].id);
     let d_nested2 = document.getElementById(this.sector2[posicion].id);
     if (d_nested2 == undefined){
-      d_nested2 = this.sector2[0].id
+      d_nested2 = this.sector2[0].id 
     }
 
     if (ejercito == this.sector1) {
@@ -305,20 +305,18 @@ class CampoDeBatalla {
   }
 
   ObtenerElementosEnPosicion() {
-    consola.insertAdjacentHTML('afterbegin',
-      '<p>'+ equipo1.nombre+' </p>');
     this.sector1.forEach(element => {
       consola.insertAdjacentHTML('afterbegin',
       '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
     });
-    consola.insertAdjacentHTML('afterbegin',
-    '<p>'+ equipo2.nombre+' </p>');
+    consola.insertAdjacentHTML('afterbegin','<p>'+ equipo1.nombre+' </p>');
     this.sector2.forEach(element => {
       /* console.log(element); */
       consola.insertAdjacentHTML('afterbegin',
       '<p> Nombre: ' + element.nombre + '  Vida: ' + element.vida + '</p>');
-        
+      
     });
+    consola.insertAdjacentHTML('afterbegin', '<p>'+ equipo2.nombre+' </p>');
   }
 }
 const factorio = new Factorio();
