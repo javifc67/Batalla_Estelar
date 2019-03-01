@@ -353,13 +353,13 @@ function   crearEquipo1(nnaves1,nnaves2,nnaves3){
          equipo2 = factorio.CrearEjercito(
           "LOS REBELDES",
           "abajo",
-          "Caza estelar Ala-X",
+          "Caza Ala-X",
           nnaves4,
           "images/45.png",
-          "Caza estelar bombardero",
+          "Caza bombardero",
           nnaves5,
           "images/1.png",
-          "Caza estelar Ala-A",
+          "Caza Ala-A",
           nnaves6,
           "images/4.png"
           );
