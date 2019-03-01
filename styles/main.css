@@ -104,11 +104,13 @@ h1{
 .navesrebeldes{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: right;
 }
 .navesimperio p,
 .navesrebeldes p{
     font-family: var(--second);
+    text-align: right;
+
 }
 .navesimperio input,
 .navesrebeldes input{
@@ -123,4 +125,25 @@ h1{
     display: flex;
     margin:0 auto;
     margin-top: 4rem;
+}
+.navesimperio p span,
+.navesrebeldes p span{
+    visibility: hidden;
+    background-color: grey;
+    color: black;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* position */
+    position: absolute;
+    z-index: 1;
+    /* bottom:100%;
+    left: 50%;
+    margin-left: -60px; */
+    display: flex;
+    justify-content: end;
+}
+.navesimperio p:hover span,
+.navesrebeldes p:hover span{
+    visibility: visible;
 }
